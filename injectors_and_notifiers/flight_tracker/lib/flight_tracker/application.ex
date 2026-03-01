@@ -10,6 +10,10 @@ defmodule FlightTracker.Application do
     children = [
       # Starts a worker by calling: FlightTracker.Worker.start_link(arg)
       # {FlightTracker.Worker, arg}
+      {FlightTracker.CloudeventInjector, [Path.relative_to_cwd(__DIR__) <> "/sample_cloudevents.json"]},
+      {FlightTracker.MessageBroadcaster, []},
+      {FlightTracker.AircraftProjector, []},
+      {FlightTracker.FlightNotifier, "AMC421"}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
